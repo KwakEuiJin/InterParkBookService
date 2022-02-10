@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="interParkAPIKey">F278E0A09276D98EAB431FD4F26653B4C896EC3C5F3F1C3B600565A7146F5424</string>
+    <string name="interParkAPIKey">your API KEy</string>
 </resources>
