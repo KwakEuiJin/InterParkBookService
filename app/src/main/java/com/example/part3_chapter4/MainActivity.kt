@@ -1,12 +1,14 @@
 package com.example.part3_chapter4
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.part3_chapter4.adapter.BookAdapter
@@ -114,6 +116,10 @@ class MainActivity : AppCompatActivity() {
         binding.searchEditText.setOnKeyListener { view, keycode, keyEvent ->
             if (keycode == KeyEvent.KEYCODE_ENTER && keyEvent.action == MotionEvent.ACTION_DOWN) {
                 search(binding.searchEditText.text.toString())
+                val inputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+                view.clearFocus()
                 return@setOnKeyListener true
             }
             return@setOnKeyListener false
@@ -129,6 +135,10 @@ class MainActivity : AppCompatActivity() {
         binding.searchButton.setOnClickListener {
             if (binding.searchEditText.text.isNotEmpty()) {
                 search(binding.searchEditText.text.toString())
+                val inputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+                binding.searchEditText.clearFocus()
             }
         }
     }
@@ -150,6 +160,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun touchSearchKeyword(keyword: String) {
         search(keyword)
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputMethodManager?.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+        binding.searchEditText.clearFocus()
         binding.searchEditText.setText(keyword ?: "")
         binding.searchEditText.setSelection(binding.searchEditText.length())
     }

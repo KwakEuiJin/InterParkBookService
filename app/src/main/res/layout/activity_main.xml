@@ -17,8 +17,6 @@
         app:layout_constraintBottom_toTopOf="@id/search_editText"
         />
 
-
-
     <EditText
         android:id="@+id/search_editText"
         android:layout_width="0dp"
